@@ -34,7 +34,7 @@ const App: React.FC = () => {
           
           {/* Floating WhatsApp Action */}
           <a 
-            href="https://wa.me/919876543210" 
+            href="https://wa.me/+919909652766?text=Hello%20Shahi%20Royalty!%20I%20would%20like%20to%20place%20an%20order." 
             target="_blank" 
             rel="noopener noreferrer"
             className="fixed bottom-8 right-8 z-50 p-4 bg-emerald-600 text-white rounded-full shadow-2xl shadow-emerald-900/40 hover:scale-110 transition-transform flex items-center justify-center"

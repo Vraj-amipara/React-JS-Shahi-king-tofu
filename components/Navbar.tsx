@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
                 <Crown className="w-6 h-6 text-amber-400" />
               </div>
               <span className="text-2xl font-serif font-bold tracking-tight text-emerald-900">
-                SHAHI <span className="text-amber-600">KING</span> TOFU
+                SHAHI <span className="text-amber-600">TOFU</span>  
               </span>
             </Link>
           </div>

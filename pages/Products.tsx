@@ -33,22 +33,22 @@ const Products: React.FC = () => {
   const closeModal = () => setInfoModal(null);
 
   return (
-    <div className="min-h-screen pb-24 pt-12">
+    <div className="min-h-screen pb-24 pt-8 sm:pt-12 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <header className="text-center mb-16">
-          <h1 className="text-5xl font-serif font-bold text-emerald-900 mb-4">The Royal Pantry</h1>
+        <header className="text-center mb-10 sm:mb-16">
+          <h1 className="text-3xl sm:text-5xl font-serif font-bold text-emerald-900 mb-4">The Royal Pantry</h1>
           <p className="text-stone-500 max-w-2xl mx-auto">
             From classic textures to bold infusions, discover the ultimate range of premium tofu products.
           </p>
         </header>
 
         {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10 sm:mb-16">
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-6 py-2 rounded-full font-medium transition-all ${
+              className={`px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base font-medium transition-all ${
                 selectedCategory === cat 
                   ? 'bg-emerald-900 text-amber-400 shadow-md' 
                   : 'bg-white text-emerald-900 hover:bg-stone-100 border border-stone-200'
@@ -60,23 +60,23 @@ const Products: React.FC = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
           {filteredProducts.map((product) => (
             <div key={product.id} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col">
-              <div className="relative h-72">
+              <div className="relative h-56 sm:h-72">
                 <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
                 <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-emerald-900">
                   {product.weight}
                 </div>
               </div>
               
-              <div className="p-8 flex-grow flex flex-col">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold text-emerald-950">{product.name}</h3>
-                  <span className="text-amber-600 font-bold text-lg">₹{product.price}</span>
+              <div className="p-5 sm:p-8 flex-grow flex flex-col min-w-0">
+                <div className="flex justify-between items-start gap-3 mb-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-emerald-950 leading-tight">{product.name}</h3>
+                  <span className="text-amber-600 font-bold text-base sm:text-lg whitespace-nowrap">Rs {product.price}</span>
                 </div>
-                <p className="text-stone-500 text-sm mb-6 flex-grow">{product.description}</p>
-                <div className="mb-6">
+                <p className="text-stone-500 text-sm mb-4 sm:mb-6 flex-grow">{product.description}</p>
+                <div className="mb-4 sm:mb-6">
                   <Link
                     to={`/products/${product.id}`}
                     className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-900 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition-colors"
@@ -86,10 +86,10 @@ const Products: React.FC = () => {
                 </div>
                 
                 {/* Info Links */}
-                <div className="flex flex-col space-y-4 mb-8">
+                <div className="flex flex-col space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                   <button 
                     onClick={() => setInfoModal({ product, tab: 'nutrition' })}
-                    className="flex items-center w-fit text-left transition-transform active:scale-95"
+                    className="flex items-center w-full text-left transition-transform active:scale-95"
                   >
                     <FileText className="w-5 h-5 mr-3 text-[#C26F12]" strokeWidth={2.5} />
                     <span className="text-[15px] font-semibold text-[#C26F12] tracking-wide">
@@ -99,7 +99,7 @@ const Products: React.FC = () => {
 
                   <button 
                     onClick={() => setInfoModal({ product, tab: 'benefits' })}
-                    className="flex items-center w-fit text-left transition-transform active:scale-95"
+                    className="flex items-center w-full text-left transition-transform active:scale-95"
                   >
                     <Heart className="w-5 h-5 mr-3 text-[#0A8F76]" strokeWidth={2.5} />
                     <span className="text-[15px] font-semibold text-[#0A8F76] tracking-wide">
@@ -109,7 +109,7 @@ const Products: React.FC = () => {
 
                   <button 
                     onClick={() => setInfoModal({ product, tab: 'ingredients' })}
-                    className="flex items-center w-fit text-left transition-transform active:scale-95"
+                    className="flex items-center w-full text-left transition-transform active:scale-95"
                   >
                     <Info className="w-5 h-5 mr-3 text-[#7A7265]" strokeWidth={2.5} />
                     <span className="text-[15px] font-semibold text-[#7A7265] tracking-wide">
@@ -120,7 +120,7 @@ const Products: React.FC = () => {
 
                 <button 
                   onClick={() => handleAddToCart(product)}
-                  className={`w-full py-4 rounded-xl font-bold flex items-center justify-center transition-all ${
+                  className={`w-full py-3.5 sm:py-4 rounded-xl font-bold flex items-center justify-center transition-all ${
                     addedIds.has(product.id)
                       ? 'bg-emerald-600 text-white'
                       : 'bg-emerald-900 text-white hover:bg-emerald-800'
@@ -145,20 +145,20 @@ const Products: React.FC = () => {
       {/* Popup Modal */}
       {infoModal && (
         <div 
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-emerald-950/60 backdrop-blur-sm animate-in fade-in duration-300"
+          className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-4 bg-emerald-950/60 backdrop-blur-sm animate-in fade-in duration-300"
           onClick={closeModal}
         >
           <div 
-            className="bg-white rounded-[2.5rem] w-full max-w-lg overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300"
+            className="bg-white rounded-3xl sm:rounded-[2.5rem] w-full max-w-lg max-h-[92vh] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative h-64">
+            <div className="relative h-48 sm:h-64">
               <img src={infoModal.product.image} className="w-full h-full object-cover" alt={infoModal.product.name} />
               
               {/* Fix: Close button moved here with high z-index and positioned properly */}
               <button 
                 onClick={closeModal}
-                className="absolute top-6 right-6 z-20 p-2.5 bg-white/20 hover:bg-white/40 backdrop-blur-md text-white rounded-full transition-all active:scale-90"
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 p-2.5 bg-white/20 hover:bg-white/40 backdrop-blur-md text-white rounded-full transition-all active:scale-90"
                 aria-label="Close modal"
               >
                 <X className="w-6 h-6" />
@@ -166,9 +166,9 @@ const Products: React.FC = () => {
 
               <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-950/40 to-transparent z-10 pointer-events-none"></div>
               
-              <div className="absolute bottom-8 left-8 z-10 text-white">
-                <h3 className="text-3xl font-serif font-bold mb-1">{infoModal.product.name}</h3>
-                <p className="text-amber-400 text-sm font-bold uppercase tracking-[0.2em]">{infoModal.product.category}</p>
+              <div className="absolute bottom-5 left-5 sm:bottom-8 sm:left-8 z-10 text-white">
+                <h3 className="text-xl sm:text-3xl font-serif font-bold mb-1">{infoModal.product.name}</h3>
+                <p className="text-xs sm:text-sm text-amber-400 font-bold uppercase tracking-[0.12em] sm:tracking-[0.2em]">{infoModal.product.category}</p>
               </div>
             </div>
 
@@ -177,7 +177,7 @@ const Products: React.FC = () => {
                 <button
                   key={tab}
                   onClick={() => setInfoModal({ ...infoModal, tab })}
-                  className={`flex-1 py-5 text-[13px] font-bold uppercase tracking-widest transition-all relative ${
+                  className={`flex-1 py-4 sm:py-5 text-[11px] sm:text-[13px] font-bold uppercase tracking-wide sm:tracking-widest transition-all relative ${
                     infoModal.tab === tab 
                       ? 'text-[#C26F12]' 
                       : 'text-stone-400 hover:text-emerald-900'
@@ -191,11 +191,11 @@ const Products: React.FC = () => {
               ))}
             </div>
 
-            <div className="p-10 max-h-[50vh] overflow-y-auto custom-scrollbar">
+            <div className="p-5 sm:p-10 flex-1 overflow-y-auto custom-scrollbar">
               {infoModal.tab === 'nutrition' && (
                 <div className="space-y-6">
                   <h4 className="text-[#004225] font-bold text-lg mb-2">Per Serving:</h4>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {Object.entries(infoModal.product.nutritionFacts || {}).map(([key, val]) => (
                       <div key={key} className="bg-stone-50/80 p-5 rounded-2xl border border-stone-100 flex flex-col justify-center">
                         <p className="text-[11px] text-stone-400 uppercase font-black tracking-widest mb-2">{key}</p>
@@ -236,10 +236,10 @@ const Products: React.FC = () => {
               )}
             </div>
 
-            <div className="px-8 pb-8">
+            <div className="px-5 pb-5 sm:px-8 sm:pb-8">
               <button 
                 onClick={closeModal}
-                className="w-full py-5 bg-[#004225] text-white font-bold rounded-2xl shadow-lg hover:bg-emerald-900 transition-all active:scale-[0.98]"
+                className="w-full py-4 sm:py-5 bg-[#004225] text-white font-bold rounded-2xl shadow-lg hover:bg-emerald-900 transition-all active:scale-[0.98]"
               >
                 Close Details
               </button>

@@ -33,14 +33,14 @@ const Cart: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pb-24 pt-12">
+    <div className="min-h-screen pb-24 pt-8 sm:pt-12 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <header className="mb-12 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+        <header className="mb-8 sm:mb-12 flex items-start sm:items-center justify-between gap-4">
+          <div className="flex items-center space-x-3 sm:space-x-4 min-w-0">
             <button onClick={() => step === 'checkout' ? setStep('cart') : null} className={`${step === 'cart' ? 'hidden' : 'block'} p-2 hover:bg-stone-100 rounded-full`}>
               <ArrowLeft className="w-6 h-6" />
             </button>
-            <h1 className="text-4xl font-serif font-bold text-emerald-900">
+            <h1 className="text-2xl sm:text-4xl font-serif font-bold text-emerald-900">
               {step === 'cart' ? 'Your Royal Selection' : 'Checkout'}
             </h1>
           </div>
@@ -51,32 +51,52 @@ const Cart: React.FC = () => {
           </div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12">
           {/* Main Content */}
           <div className="lg:col-span-2">
             {step === 'cart' ? (
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {cart.map((item) => (
-                  <div key={item.id} className="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 flex items-center space-x-6">
-                    <img src={item.image} className="w-24 h-24 rounded-xl object-cover" alt={item.name} />
-                    <div className="flex-grow">
-                      <h3 className="text-lg font-bold text-emerald-950">{item.name}</h3>
-                      <p className="text-stone-400 text-sm">{item.weight}</p>
-                      <p className="text-amber-600 font-bold mt-1">₹{item.price}</p>
+                  <div key={item.id} className="bg-white p-4 sm:p-6 rounded-3xl shadow-sm border border-stone-100">
+                    <div className="flex items-center gap-4 sm:gap-6">
+                      <img src={item.image} className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover flex-shrink-0" alt={item.name} />
+                      <div className="flex-grow min-w-0">
+                      <h3 className="text-xl sm:text-2xl leading-tight font-serif font-bold text-emerald-950">{item.name}</h3>
+                      <p className="text-stone-400 text-sm sm:text-base mt-1">{item.weight}</p>
+                      <p className="text-amber-600 text-2xl sm:text-xl font-bold mt-1">Rs {item.price}</p>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-3 bg-stone-50 px-3 py-1 rounded-lg">
-                      <button onClick={() => updateQuantity(item.id, -1)} className="p-1 hover:text-amber-600"><Minus className="w-4 h-4" /></button>
-                      <span className="font-bold w-6 text-center">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.id, 1)} className="p-1 hover:text-amber-600"><Plus className="w-4 h-4" /></button>
+                    <div className="mt-4 flex items-center justify-between gap-3">
+                      <div className="inline-flex items-center bg-stone-100 rounded-full p-1.5">
+                        <button
+                          onClick={() => updateQuantity(item.id, -1)}
+                          className="w-9 h-9 rounded-full text-emerald-900 hover:bg-white transition-colors flex items-center justify-center"
+                          aria-label={`Decrease ${item.name} quantity`}
+                        >
+                          <Minus className="w-4 h-4" />
+                        </button>
+                        <span className="w-10 text-center text-emerald-950 font-bold text-base">{item.quantity}</span>
+                        <button
+                          onClick={() => updateQuantity(item.id, 1)}
+                          className="w-9 h-9 rounded-full text-emerald-900 hover:bg-white transition-colors flex items-center justify-center"
+                          aria-label={`Increase ${item.name} quantity`}
+                        >
+                          <Plus className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="w-10 h-10 rounded-full text-stone-300 hover:text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center"
+                        aria-label={`Remove ${item.name}`}
+                      >
+                        <Trash2 className="w-6 h-6" />
+                      </button>
                     </div>
-                    <button onClick={() => removeFromCart(item.id)} className="text-stone-300 hover:text-red-500 transition-colors">
-                      <Trash2 className="w-6 h-6" />
-                    </button>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="bg-white p-10 rounded-3xl shadow-sm border border-stone-100 space-y-8">
+              <div className="bg-white p-5 sm:p-10 rounded-3xl shadow-sm border border-stone-100 space-y-8">
                 <div>
                   <h3 className="text-xl font-bold text-emerald-900 mb-6 flex items-center">
                     <MapPin className="w-5 h-5 mr-2 text-amber-500" /> Delivery Details
@@ -109,12 +129,12 @@ const Cart: React.FC = () => {
 
           {/* Sidebar Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white p-8 rounded-3xl shadow-lg border border-stone-100 sticky top-32">
+            <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-stone-100 lg:sticky lg:top-32">
               <h3 className="text-xl font-bold text-emerald-900 mb-8 pb-4 border-b border-stone-100">Order Summary</h3>
               <div className="space-y-4 mb-8">
                 <div className="flex justify-between text-stone-500">
                   <span>Subtotal ({itemCount} items)</span>
-                  <span>₹{cartTotal}</span>
+                  <span>Rs {cartTotal}</span>
                 </div>
                 <div className="flex justify-between text-stone-500">
                   <span>Delivery Fee</span>
@@ -122,7 +142,7 @@ const Cart: React.FC = () => {
                 </div>
                 <div className="flex justify-between text-xl font-bold text-emerald-900 pt-4 border-t border-stone-100">
                   <span>Total</span>
-                  <span>₹{cartTotal}</span>
+                  <span>Rs {cartTotal}</span>
                 </div>
               </div>
 
